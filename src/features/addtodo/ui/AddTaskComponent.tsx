@@ -1,4 +1,5 @@
-export const AddTaskComponent = () => {
+import React from 'react';
+export const AddTaskComponent: React.FC = () => {
     return (
         <>
             <div className="flex flex-col">

@@ -17,7 +17,14 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -33,6 +40,13 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+  // Specific configuration for config files
+  {
+    files: ['*.config.js', 'postcss.config.cjs', 'tailwind.config.js'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
 ]
