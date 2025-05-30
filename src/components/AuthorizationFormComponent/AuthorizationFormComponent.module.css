@@ -1,0 +1,53 @@
+.login_container {
+    width: 302px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    padding: 20px;
+    box-shadow: 8px 8px 24px 0 rgba(66, 68, 90, 1);
+}
+
+.login_container_mini_header {
+    text-align:center;
+    display: inline-block;
+    vertical-align: middle;
+    color: gray;
+}
+
+
+.login_container_mini_header:before,
+.login_container_mini_header:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 40%;
+    height: 1.5px;
+    background-color: lightgray;
+    position: relative;
+}
+
+.login_container_mini_header:before {
+    margin-left: -100%;
+    left: -14px;
+}
+
+.login_container_mini_header:after{
+    margin-right: -100%;
+    right: -14px;
+}
+
+
+.error_message_hide {
+    display: none;
+}
+
+.error_message_show {
+    display: inline;
+    color: red;
+    font-size: 10px;
+    opacity: 1;
+}
+
+

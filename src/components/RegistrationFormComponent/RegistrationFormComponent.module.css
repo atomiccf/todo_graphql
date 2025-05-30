@@ -1,0 +1,16 @@
+.registration_container {
+    width: 302px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    padding: 20px;
+    box-shadow: 8px 8px 24px 0 rgba(66, 68, 90, 1);
+}
+
+
+
+
+
+
