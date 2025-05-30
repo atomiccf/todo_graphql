@@ -1,47 +1,37 @@
-import { useState } from "react";
-import style from './RegistrationFormComponent.module.css'
-import { gql, useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import style from './RegistrationForm.module.css'
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from "../model/graphql";
 
-const CREATE_USER = gql`
-  mutation CreateUser($userInput: UserInput!) {
-    createUser(userInput: $userInput) {
-      username
-      password  
-      first_name
-      last_name
-    }
-  }
-`;
 
-export const RegistrationFormComponent = () => {
-    const [email, setEmail] = useState ()
-    const [password, setPassword] = useState ()
-    const [firstName, setFirstName] = useState  ()
-    const [lastName, setLastName] = useState  ()
+export const RegistrationForm = () => {
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
 
     const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
-    const handleEmail = (EO) => {
+    const handleEmail = (EO: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(EO.target.value)
     }
 
-    const handlePassword = (EO) => {
+    const handlePassword = (EO: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(EO.target.value)
     }
 
-    const handleFirstName = (EO) => {
+    const handleFirstName = (EO: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(EO.target.value)
     }
 
-    const handleLastName = (EO) => {
+    const handleLastName = (EO: React.ChangeEvent<HTMLInputElement>) => {
         setLastName(EO.target.value)
     }
 
     const handleRegistrationButton = async () => {
 
         try {
-
-            const response = await createUser({
+             await createUser({
                 variables: {
                     userInput: {
                         username: email,
@@ -52,7 +42,6 @@ export const RegistrationFormComponent = () => {
                 }
             });
 
-            console.log("User Created:", response.data.createUser);
         } catch (err) {
             console.error("Error creating user:", err);
         }

@@ -1,7 +1,8 @@
 import './App.css'
+import React from 'react';
+import { RequireAuth } from "features/require-auth";
+import { Outlet } from "react-router-dom";
 
-import {RequireAuth} from "./components/RequareAuth/RequireAuth.jsx";
-import {Outlet} from "react-router-dom";
 
 export const App = () => {
 

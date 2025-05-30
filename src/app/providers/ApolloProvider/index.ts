@@ -1,0 +1,1 @@
+export { ProviderApollo } from './ApolloProvider';

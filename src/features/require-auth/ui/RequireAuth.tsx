@@ -1,19 +1,17 @@
-import {jwtDecode} from "jwt-decode";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {gql, useMutation} from "@apollo/client";
+import React,{ReactNode, useEffect} from "react";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import {REFRESH_TOKEN} from "../model/graphql";
 
-const REFRESH_TOKEN = gql`
-    mutation refreshToken {
-        refreshToken {
-            accessToken
-        }
-    }
-`;
+type RequireAuthProps = {
+    children: ReactNode
+}
 
-export const RequireAuth = ({ children }) => {
+export const RequireAuth:React.FC<RequireAuthProps> = ({ children }) => {
     const accessToken = localStorage.getItem('jwt');
     const navigate = useNavigate();
+
     const [refreshToken, { loading, error }] = useMutation(REFRESH_TOKEN, {
         onCompleted: (data) => {
             console.log('data', data);
@@ -34,11 +32,13 @@ export const RequireAuth = ({ children }) => {
             }
 
             try {
-                const decoded = jwtDecode(accessToken);
-                const currentTime = Math.floor(Date.now() / 1000);
-                if (decoded.exp < currentTime) {
-                    await refreshToken();
+                const decoded:JwtPayload = jwtDecode(accessToken);
+                const currentTime:number = Math.floor(Date.now() / 1000);
+
+                if (decoded.exp && decoded.exp < currentTime) {
+                  await refreshToken();
                 }
+
             } catch (e) {
                 navigate('/');
             }

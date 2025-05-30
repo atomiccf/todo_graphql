@@ -1,24 +1,19 @@
-import {useState} from "react";
-import style from './AuthorizationFormComponent.module.css'
+import React, { useState } from "react";
+import style from './AuthorizationForm.module.css'
 import { useNavigate } from 'react-router-dom'
-import {gql, useMutation} from "@apollo/client";
+import { USER_LOGIN } from "../model/graphql";
+import { useMutation} from "@apollo/client";
 
-const LOGIN_USER = gql`
-    mutation loginUser($loginInput: LoginInput!) {
-        loginUser(loginInput: $loginInput) {
-            accessToken
-        }
-    }
-`;
 
-export const AuthorizationFormComponent = () => {
 
-    const [email, setEmail] = useState ()
-    const [password, setPassword] = useState ()
+export const AuthorizationForm = () => {
+
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const navigate = useNavigate()
-    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+    const [loginUser, { data,  }] = useMutation(USER_LOGIN);
 
-    const handleEmail = (EO) => {
+    const handleEmail = (EO: React.ChangeEvent<HTMLInputElement>) => {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
           if (emailRegex.test(EO.target.value)) {
               setEmail(EO.target.value)
@@ -29,8 +24,9 @@ export const AuthorizationFormComponent = () => {
 
     }
 
-    const handlePassword = (EO) => {
-        setPassword(EO.target.value)
+
+    const handlePassword = (EO: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(EO.target.value);
     }
 
     const handleLoginButton = async () => {
@@ -45,7 +41,9 @@ export const AuthorizationFormComponent = () => {
             });
             console.log("Access granted:", response);
             console.log('Access_data', data);
-            localStorage.setItem('jwt', response.data.loginUser.accessToken);
+            if(response.data){
+                localStorage.setItem('jwt', response?.data.loginUser.accessToken);
+            }
             navigate('app/main')
         } catch (error) {
             console.error("Error during login:", error);

@@ -1,4 +1,4 @@
-import {AddTaskComponent} from "../../components/AddTaskComponent/AddTaskComponent.jsx";
+import {AddTaskComponent} from "features/addtodo/ui/AddTaskComponent";
 
 export const TaskPage = () => {
     return (
