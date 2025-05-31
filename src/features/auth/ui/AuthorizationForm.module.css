@@ -9,45 +9,57 @@
     box-shadow: 8px 8px 24px 0 rgba(66, 68, 90, 1);
 }
 
-.login_container_mini_header {
-    text-align:center;
-    display: inline-block;
-    vertical-align: middle;
-    color: gray;
+.input{
+    width: 459px;
+    height: 60px;
+    border-radius: 8px;
+    padding-left: 36px;
+    border: 1px solid #BDBDBD;
+    color: #282c34;
 }
 
+.input::placeholder {
+    color: #999999;
+}
 
-.login_container_mini_header:before,
-.login_container_mini_header:after {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 40%;
-    height: 1.5px;
-    background-color: lightgray;
+.input_container {
     position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
-.login_container_mini_header:before {
-    margin-left: -100%;
-    left: -14px;
+.logo{
+    width: 30px;
+    height: 30px;
+    position: absolute;
 }
 
-.login_container_mini_header:after{
-    margin-right: -100%;
-    right: -14px;
+.logo_user {
+    top: 25%;
 }
 
-
-.error_message_hide {
-    display: none;
+.logo_password {
+    top: 25%;
 }
 
-.error_message_show {
-    display: inline;
+.submit {
+    width: 129px;
+    height: 60px;
+    border-radius: 8px;
+    background: #FF9090;
+}
+
+.error{
     color: red;
-    font-size: 10px;
-    opacity: 1;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: 12px;
+    margin-top: 2px;
 }
+
+
+
+
 
 
