@@ -1,12 +1,16 @@
 import style from './RegistrationPage.module.css'
-import {RegistrationForm} from "features/registration/ui/RegistrationForm";
+import { RegistrationForm } from "features/registration/ui/RegistrationForm";
+
+import img from "assets/sign_up_img.png";
 
 
 export const RegistrationPage = () => {
     return (
         <div className={style.registration_wrapper}>
-            <h1 className='text-2xl font-bold text-white mb-5'>Please register!</h1>
-            <RegistrationForm />
+            <div className='flex items-center justify-around w-3/5 h-3/4 bg-white rounded '>
+             <img className='mt-30' src={img} alt="phone_and_girl"/>
+             <RegistrationForm />
+            </div>
         </div>
     )
 }

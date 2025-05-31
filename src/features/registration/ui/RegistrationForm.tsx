@@ -1,43 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import style from './RegistrationForm.module.css'
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from "../model/graphql";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import first_name_logo from 'assets/mdi_firstName.png'
+import last_name_logo from 'assets/mdi_lastName.png'
+import user_logo from 'assets/mdi_user.png'
+import email_logo from 'assets/ic_baseline-email.png'
+import confirm_password_logo from 'assets/mdi_password-outline.png'
+import password_logo from 'assets/mdi_password.png'
 
+interface IFormInput {
+    username: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+    first_name: string;
+    last_name: string;
+    terms: boolean
+}
 
 export const RegistrationForm = () => {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [firstName, setFirstName] = useState<string>('')
-    const [lastName, setLastName] = useState<string>('')
-
+    const { register, handleSubmit, formState } = useForm<IFormInput>()
     const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
-
-    const handleEmail = (EO: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(EO.target.value)
-    }
-
-    const handlePassword = (EO: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(EO.target.value)
-    }
-
-    const handleFirstName = (EO: React.ChangeEvent<HTMLInputElement>) => {
-        setFirstName(EO.target.value)
-    }
-
-    const handleLastName = (EO: React.ChangeEvent<HTMLInputElement>) => {
-        setLastName(EO.target.value)
-    }
-
-    const handleRegistrationButton = async () => {
-
+    const onSubmit = async (data: IFormInput) => {
+        console.log(data);
         try {
-             await createUser({
+            if(data.password !== data.confirm_password) {
+                throw new Error('Passwords do not match');
+            }
+            await createUser({
                 variables: {
                     userInput: {
-                        username: email,
-                        password,
-                        first_name: firstName,
-                        last_name: lastName
+                        username: data.username,
+                        email: data.email,
+                        password: data.password,
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                        terms: data.terms
                     }
                 }
             });
@@ -47,47 +48,131 @@ export const RegistrationForm = () => {
         }
     }
 
-
     return (
-        <div className={style.registration_container}>
-            <h2 className="text-2xl text-black mb-3">Registration form:</h2>
-            <div className="flex flex-col gap-5 justify-center">
-                <input
-                       type="text"
-                       className="bg-white  border-1 rounded-sm p-2 border-black w-full
-                         focus:outline focus:outline-sky-500 text-black"
-                       placeholder="Email"
-                       onChange={handleEmail}
-
-                />
-                <input
-                    type="password"
-                       placeholder="Password"
-                    className="bg-white  border-1 rounded-sm p-2 border-black w-full
-                         focus:outline focus:outline-sky-500 text-black"
-                       onChange={handlePassword}
-                />
-                <input type="text"
-                       placeholder="First Name"
-                       className="bg-white  border-1 rounded-sm p-2 border-black w-full
-                         focus:outline focus:outline-sky-500 text-black"
-                       onChange={handleFirstName}
-                />
-                <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="bg-white  border-1 rounded-sm p-2 border-black w-full
-                         focus:outline focus:outline-sky-500 text-black"
-                    onChange={handleLastName}
-                />
-                <button
-                    className="bg-gradient-to-r from-[#353e6a] via-[#283053] to-[#171c2f]"
-                    onClick={handleRegistrationButton}
-                >
-                    Register
-                </button>
-            </div>
+        <div className='flex flex-col items-start'>
+            <h1 className="text-3xl mb-5 ml-16 text-black ">Sign Up</h1>
+            <form action="" onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col justify-start gap-3 pl-1 mb-5 ml-16"
+            >
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_first_name}`} src={first_name_logo} alt="first_name_logo"/>
+                    <input
+                        {...register("first_name", {
+                          required: 'First Name is required',
+                          minLength: {
+                            value: 3,
+                            message: 'First Name must be at least 3 characters',
+                          }
+                        })}
+                        className={style.input}
+                        type="text"
+                        placeholder="Enter First Name"
+                    />
+                    {formState.errors.first_name && <p className={style.error}>{formState.errors.first_name.message}</p>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_last_name}`} src={last_name_logo} alt="last_name_logo"/>
+                    <input
+                        {...register("last_name", {
+                          required: 'Last Name is required',
+                          minLength: {
+                            value: 3,
+                            message: 'Last Name must be at least 3 characters',
+                          }
+                        })}
+                        className={style.input}
+                        type="text"
+                        placeholder="Enter Last Name"/>
+                    {formState.errors.last_name && <p className={style.error}>{formState.errors.last_name.message}</p>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_user}`} src={user_logo} alt="user_logo"/>
+                    <input
+                        {...register("username", {
+                            required: 'Username is required',
+                            minLength: {
+                                value: 3,
+                                message: 'Username must be at least 3 characters',
+                            },
+                        })}
+                        className={style.input}
+                        type="text"
+                        placeholder="Enter Username"/>
+                    {formState.errors.username && <p className={style.error}>{formState.errors.username.message}</p>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_email}`} src={email_logo} alt="email_logo"/>
+                    <input
+                        {...register("email", {
+                            required: 'Email is required',
+                            pattern: {
+                                value:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                                message: 'Invalid email format'
+                            }
+                        })
+                        }
+                        className={style.input}
+                        type="text"
+                        placeholder="Enter Email"/>
+                    {formState.errors.email && <p className={style.error}>{formState.errors.email.message}</p>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_password}`} src={password_logo} alt="password_logo"/>
+                    <input
+                        {...register('password', {
+                            required: 'Password is required',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be at least 8 characters',
+                            },
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/,
+                                message:
+                                    'Password must include at least one letter, one number, and one special character',
+                            },
+                        })}
+                        className={style.input}
+                        type="password"
+                        placeholder="Enter Password"
+                    />
+                    {formState.errors.password && <div className={style.error}>{formState.errors.password.message}</div>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_confirm_password}`} src={confirm_password_logo} alt="confirm_password_logo"/>
+                    <input
+                        {...register('confirm_password', {
+                            required: 'Password is required',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be at least 8 characters',
+                            },
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/,
+                                message:
+                                    'Password must include at least one letter, one number, and one special character',
+                            },
+                        })}
+                        className={style.input}
+                        type="password"
+                        placeholder="Confirm Password"/>
+                </div>
+                <div className="flex items-center">
+                    <input
+                        {...register('terms', {
+                            required: 'Agreement is required',})
+                        }
+                        type="checkbox"
+                        id="remember"
+                        name="scales" />
+                    <span style={{width:"30%", color:"black"}}>
+                    I agree all terms
+                </span>
+                </div>
+                <input type="submit" className={style.submit} value="Register"/>
+            </form>
+            <p className='ml-16 mb-2.5 text-black'>Already have an account? <Link to="/">Sign In</Link></p>
         </div>
+
     );
 
 }

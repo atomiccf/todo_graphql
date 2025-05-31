@@ -1,93 +1,96 @@
-import React, { useState } from "react";
+import React from "react";
 import style from './AuthorizationForm.module.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { USER_LOGIN } from "../model/graphql";
-import { useMutation} from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { useForm, SubmitHandler } from "react-hook-form"
+import user_logo from 'assets/mdi_user.png'
+import password_logo from 'assets/mdi_password.png'
 
 
+interface IFormInput {
+    username: string
+    password: string
+}
 
 export const AuthorizationForm = () => {
-
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const { register, handleSubmit, formState } = useForm<IFormInput>()
     const navigate = useNavigate()
-    const [loginUser, { data,  }] = useMutation(USER_LOGIN);
-
-    const handleEmail = (EO: React.ChangeEvent<HTMLInputElement>) => {
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-          if (emailRegex.test(EO.target.value)) {
-              setEmail(EO.target.value)
-          } else {
-             throw new Error("Invalid email format")
-          }
-
-
-    }
-
-
-    const handlePassword = (EO: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(EO.target.value);
-    }
-
-    const handleLoginButton = async () => {
+    const [loginUser,] = useMutation(USER_LOGIN);
+    const onSubmit: SubmitHandler<IFormInput> = async (data:IFormInput) => {
+        console.log(data)
         try {
             const response = await loginUser({
                 variables: {
                     loginInput: {
-                        username: email,
-                        password: password,
+                        username: data.username,
+                        password: data.password,
                     }
                 },
             });
             console.log("Access granted:", response);
             console.log('Access_data', data);
-            if(response.data){
+            if (response.data) {
                 localStorage.setItem('jwt', response?.data.loginUser.accessToken);
             }
             navigate('app/main')
         } catch (error) {
             console.error("Error during login:", error);
         }
-    };
-
-    const handleRegistrationButton = () => {
-        navigate('/register')
     }
 
-     return (
-         <div className={style.login_container}>
+    return (
+        <div className="flex flex-col items-start">
+            <h1 className="text-3xl mb-5 ml-16 text-black">Sign In</h1>
+            <form action="" onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col justify-start gap-3 pl-1 mb-5 ml-16"
+            >
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_user}`} src={user_logo} alt="user_logo"/>
+                    <input
+                        {...register("username", {
+                        required: 'Username is required',
+                        pattern: {value:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i, message: 'Invalid email format'}
+                    })
+                    }
+                           type="text" placeholder="Enter username"
+                           className={`${style.input} `}
+                    />
+                    {formState.errors.username && <p className={style.error}>{formState.errors.username.message}</p>}
+                </div>
+                <div className={style.input_container}>
+                    <img className={`${style.logo} ${style.logo_password}`} src={password_logo} alt="password_logo"/>
+                    <input
+                        {...register('password', {
+                            required: 'Password is required',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be at least 8 characters',
+                            },
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/,
+                                message:
+                                    'Password must include at least one letter, one number, and one special character',
+                            },
+                        })}
+                        type="password"
+                        placeholder="Enter password"
+                        className={style.input}
+                    />
+                    {formState.errors.password && <div className={style.error}>{formState.errors.password.message}</div>}
+                </div>
+                <div className="flex items-center">
+                    <input type="checkbox" id="remember" name="scales" />
+                    <span style={{width:"30%", color:"black"}}>
+                    Remember me
+                </span>
+                </div>
+                <input type="submit" value="Sign in" className={style.submit}/>
+            </form>
+            <p className='ml-16 mb-2.5 text-black'>Or, login with</p>
+            <p className='ml-16 mb-2.5 text-black'>Don't have an account? <Link to="/register">Create one</Link></p>
+        </div>
 
-             <h2 className="text-2xl mb-4.5 text-black">Sign In</h2>
-             <div className='flex flex-col justify-center h-auto gap-5'>
-                 <input type="email"
-                        placeholder="E-mail"
-                        className="bg-white border-1 mb-2.5 rounded-sm p-2 border-black w-full ,
-                         focus:outline focus:outline-sky-500 text-black"
-                        onChange={handleEmail}
-                        />
-                 <input type="password"
-                        placeholder="Password"
-                        id={'Password'}
-                        onChange={handlePassword}
-                        className="bg-white  border-1 rounded-sm p-2 border-black w-full
-                         focus:outline focus:outline-sky-500 text-black"
-                 />
 
-                 <a className='mb-2.5 pl-37 text-[#5A85E4] text-[10px] align-text-center' href="#">
-                     Forgot the password ?
-                 </a>
-
-                 <button className="bg-gradient-to-r from-[#12BBFF] via-[#159CFF] to-[#1864FF]" onClick={handleLoginButton}>
-                     Sign in
-                 </button>
-                 <h6 className={style.login_container_mini_header}>or</h6>
-                 <button
-                     className="bg-gradient-to-r from-[#353e6a] via-[#283053] to-[#171c2f]"
-                     onClick={handleRegistrationButton}>
-                     Register
-                 </button>
-             </div>
-         </div>
-     )
-
+    )
 }

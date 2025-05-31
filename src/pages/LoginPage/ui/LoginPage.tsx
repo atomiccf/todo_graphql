@@ -1,11 +1,15 @@
 import style from './LoginPage.module.css'
-import { AuthorizationForm } from "features/auth/";
+import img from 'assets/sign_in_img.png'
+import { AuthorizationForm } from "features/auth";
+
 
 export const LoginPage = () => {
     return(
         <div className={style.login_wrapper}>
-            <h1 className='text-2xl mb-5'>Welcome!</h1>
-            <AuthorizationForm />
+            <div className='flex items-center justify-around w-3/5 h-3/4 bg-white rounded '>
+                <AuthorizationForm />
+                <img className='mt-30' src={img} alt="phone_and_girl"/>
+            </div>
         </div>
     )
 }

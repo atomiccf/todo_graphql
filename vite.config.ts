@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-// @ts-ignore
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import { fileURLToPath } from 'url';
@@ -23,6 +22,7 @@ export default defineConfig({
     },
   resolve: {
         alias: {
+            'assets': path.resolve(__dirname, './src/assets'),
             'shared': path.resolve(__dirname, './src/shared'),
             'entities': path.resolve(__dirname, './src/entities'),
             'features': path.resolve(__dirname, './src/features'),
