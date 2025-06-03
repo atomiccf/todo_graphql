@@ -32,6 +32,10 @@ export default defineConfig({
         }
     },
     server: {
+        headers: {
+            "Cross-Origin-Opener-Policy": "same-origin-allow-popups same-origin",
+            "Cross-Origin-Embedder-Policy": "same-origin"
+        },
         proxy: {
             '/api': 'http://localhost:3000'
         }

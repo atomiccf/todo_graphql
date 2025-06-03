@@ -1,15 +1,15 @@
 import React from "react";
 import style from './RegistrationForm.module.css'
-import { useMutation } from '@apollo/client';
-import { CREATE_USER } from "../model/graphql";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { useRegister } from "features/registration/model/useRegister";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
 import first_name_logo from 'assets/mdi_firstName.png'
 import last_name_logo from 'assets/mdi_lastName.png'
 import user_logo from 'assets/mdi_user.png'
 import email_logo from 'assets/ic_baseline-email.png'
 import confirm_password_logo from 'assets/mdi_password-outline.png'
 import password_logo from 'assets/mdi_password.png'
+
 
 interface IFormInput {
     username: string;
@@ -23,14 +23,12 @@ interface IFormInput {
 
 export const RegistrationForm = () => {
     const { register, handleSubmit, formState } = useForm<IFormInput>()
-    const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
-    const onSubmit = async (data: IFormInput) => {
-        console.log(data);
+    const [ createUser ] = useRegister();
+    const navigate = useNavigate()
+    const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => {
         try {
-            if(data.password !== data.confirm_password) {
-                throw new Error('Passwords do not match');
-            }
-            await createUser({
+
+           const response= await createUser({
                 variables: {
                     userInput: {
                         username: data.username,
@@ -43,7 +41,13 @@ export const RegistrationForm = () => {
                 }
             });
 
+            if (response.data){
+                localStorage.setItem('jwt', response?.data.createUser.accessToken);
+                navigate('/app/main')
+            }
+
         } catch (err) {
+            alert(`Error creating user: ${err}`)
             console.error("Error creating user:", err);
         }
     }
@@ -51,7 +55,7 @@ export const RegistrationForm = () => {
     return (
         <div className='flex flex-col items-start'>
             <h1 className="text-3xl mb-5 ml-16 text-black ">Sign Up</h1>
-            <form action="" onSubmit={handleSubmit(onSubmit)}
+            <form onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col justify-start gap-3 pl-1 mb-5 ml-16"
             >
                 <div className={style.input_container}>
@@ -162,13 +166,13 @@ export const RegistrationForm = () => {
                             required: 'Agreement is required',})
                         }
                         type="checkbox"
-                        id="remember"
-                        name="scales" />
+                        id="terms"
+                        name="terms" />
                     <span style={{width:"30%", color:"black"}}>
                     I agree all terms
                 </span>
                 </div>
-                <input type="submit" className={style.submit} value="Register"/>
+                <input type="submit" value="Register" className={style.submit}/>
             </form>
             <p className='ml-16 mb-2.5 text-black'>Already have an account? <Link to="/">Sign In</Link></p>
         </div>

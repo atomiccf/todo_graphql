@@ -1,11 +1,12 @@
 import React from "react";
 import style from './AuthorizationForm.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { USER_LOGIN } from "../model/graphql";
-import { useMutation } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useLogin } from "features/auth/model/useLogin";
 import user_logo from 'assets/mdi_user.png'
 import password_logo from 'assets/mdi_password.png'
+import {GoogleLoginButton} from "shared/ui/GoogleLoginButton";
+
 
 
 interface IFormInput {
@@ -16,7 +17,7 @@ interface IFormInput {
 export const AuthorizationForm = () => {
     const { register, handleSubmit, formState } = useForm<IFormInput>()
     const navigate = useNavigate()
-    const [loginUser,] = useMutation(USER_LOGIN);
+    const [loginUser] = useLogin();
     const onSubmit: SubmitHandler<IFormInput> = async (data:IFormInput) => {
         console.log(data)
         try {
@@ -28,12 +29,12 @@ export const AuthorizationForm = () => {
                     }
                 },
             });
-            console.log("Access granted:", response);
-            console.log('Access_data', data);
+
             if (response.data) {
                 localStorage.setItem('jwt', response?.data.loginUser.accessToken);
+                navigate('app/main')
             }
-            navigate('app/main')
+
         } catch (error) {
             console.error("Error during login:", error);
         }
@@ -87,7 +88,11 @@ export const AuthorizationForm = () => {
                 </div>
                 <input type="submit" value="Sign in" className={style.submit}/>
             </form>
-            <p className='ml-16 mb-2.5 text-black'>Or, login with</p>
+            <div className='flex items-center justify-center'>
+                <p className='ml-16 mr-2.5 mb-2.5 text-black'>Or, login with</p>
+                <GoogleLoginButton />
+            </div>
+
             <p className='ml-16 mb-2.5 text-black'>Don't have an account? <Link to="/register">Create one</Link></p>
         </div>
 
