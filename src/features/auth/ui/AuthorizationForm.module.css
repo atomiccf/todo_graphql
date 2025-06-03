@@ -49,6 +49,10 @@
     background: #FF9090;
 }
 
+.alter_registration{
+   display: flex;
+}
+
 .error{
     color: red;
     position: absolute;

@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Router } from 'app/providers/RouterProvider';
 import { ProviderApollo } from 'app/providers/ApolloProvider';
+import { ProviderGoogleOAuth } from 'app/providers/GoogleOAuthProvider';
 
 import './index.css';
 
@@ -15,8 +16,10 @@ const root = createRoot(container);
 
 root.render(
     <StrictMode>
-        <ProviderApollo>
-            <Router />
-        </ProviderApollo>
+        <ProviderGoogleOAuth>
+            <ProviderApollo>
+                <Router />
+            </ProviderApollo>
+        </ProviderGoogleOAuth>
     </StrictMode>
 );

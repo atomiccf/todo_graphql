@@ -61,6 +61,7 @@
 }
 
 .submit {
+    cursor: pointer;
     width: 129px;
     height: 60px;
     border-radius: 8px;

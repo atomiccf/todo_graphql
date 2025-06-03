@@ -1,0 +1,1 @@
+export { ProviderGoogleOAuth } from './GoogleOAuthProvider';
