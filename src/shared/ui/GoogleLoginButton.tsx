@@ -23,7 +23,7 @@ export const GoogleLoginButton = () => {
 
             if (token) {
                 localStorage.setItem('jwt', token);
-                navigate('/app/main');
+                navigate('/app/dashboard');
             } else {
                 console.error('Token not received');
             }

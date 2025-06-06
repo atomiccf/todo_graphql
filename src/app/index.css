@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: #282c34;
+  background-color: white;
   font-family: "Montserrat", sans-serif;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,11 +20,11 @@ body {
 
 #root {
   text-align: center;
-  background-color: #282c34;
+  background-color: white;
   margin: 0 auto;
   width: 100%;
-  min-height: 100vh;
-  color: #FFFF;
+  height: 100vh;
+  color: #F5F8FF;
 }
 
 a {
@@ -55,6 +55,11 @@ input:-webkit-autofill {
   background-color: white ;
   -webkit-box-shadow: 0 0 0 1000px white inset ;
   -webkit-text-fill-color: #000 ;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }
 
 button {
