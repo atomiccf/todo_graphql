@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { App } from 'app/App'
 import { LoginPage } from 'pages/LoginPage/ui/LoginPage'
 import { RegistrationPage } from "pages/RegistrationPage/ui/RegistrationPage";
-import {TaskPage} from "pages/TaskPage/ui/TaskPage";
+import { DashboardPage } from "pages/DashboardPage/ui/DashboardPage";
 import React from 'react';
 
 export const router = createBrowserRouter([
@@ -22,8 +22,8 @@ export const router = createBrowserRouter([
         errorElement: '',
         children: [
             {
-                path: 'main',
-                element: <TaskPage />
+                path: 'dashboard',
+                element: <DashboardPage />
             }
         ]
     },

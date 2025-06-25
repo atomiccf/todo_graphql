@@ -32,7 +32,7 @@ export const AuthorizationForm = () => {
 
             if (response.data) {
                 localStorage.setItem('jwt', response?.data.loginUser.accessToken);
-                navigate('app/main')
+                navigate('app/dashboard');
             }
 
         } catch (error) {
@@ -51,7 +51,10 @@ export const AuthorizationForm = () => {
                     <input
                         {...register("username", {
                         required: 'Username is required',
-                        pattern: {value:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i, message: 'Invalid email format'}
+                        minLength: {
+                            value: 3,
+                            message: 'Username must be at least 3 characters',
+                        },
                     })
                     }
                            type="text" placeholder="Enter username"

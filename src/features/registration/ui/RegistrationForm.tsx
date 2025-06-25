@@ -43,7 +43,7 @@ export const RegistrationForm = () => {
 
             if (response.data){
                 localStorage.setItem('jwt', response?.data.createUser.accessToken);
-                navigate('/app/main')
+                navigate('/app/dashboard');
             }
 
         } catch (err) {
