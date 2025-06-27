@@ -1,4 +1,5 @@
-import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs"
 import React, {JSX} from 'react';
 
 type ProviderApolloProps = {
@@ -6,9 +7,12 @@ type ProviderApolloProps = {
 };
 
 export const ProviderApollo = ({ children }: ProviderApolloProps): JSX.Element => {
-    const link = createHttpLink({
+    const link = createUploadLink({
         uri: 'http://localhost:3000/',
         credentials: 'include',
+        headers: {
+            'Apollo-Require-Preflight': 'true'
+        }
     });
 
     const client = new ApolloClient({
