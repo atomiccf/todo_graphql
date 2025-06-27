@@ -3,7 +3,7 @@ import React from 'react';
 export const TaskSearchInput: React.FC = () => {
 
     return (
-    <div className='flex items-center'>
+    <div className='flex items-center mr-20'>
         <input
             className='w-[695px] h-[36px] border rounded-lg rounded-r-none pl-3'
             type="text"

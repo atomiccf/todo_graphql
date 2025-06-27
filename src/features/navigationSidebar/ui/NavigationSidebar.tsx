@@ -9,7 +9,7 @@ export const NavigationSidebar = () => {
 
     return  (
         <div className="flex flex-col items-center mb-8 pt-28 bg-[#ff6767] rounded-lg h-[100vh] w-[395px] relative">
-            <img src={defaultAvatar} alt="Rounded Image" className="rounded-lg w-44 h-44 absolute top-[-50px]"/>
+            <img src={defaultAvatar}  alt="Rounded Image" className="rounded-full w-[86px] h-[86px] absolute top-[-22px] bg-white object-fill"/>
             <div>
                 <h3 className="font-semibold text-lg">{`${user?.getUser.first_name}  ${user?.getUser.last_name}`} </h3>
                 <p className="text-sm opacity-90 mb-3">{`${user?.getUser.email}`}</p>

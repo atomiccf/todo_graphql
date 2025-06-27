@@ -1,0 +1,18 @@
+.input_title {
+    border: 1px solid #565454;
+    width: 50%;
+    height: 34px;
+}
+
+.input_date {
+    border: 1px solid #565454;
+    width: 50%;
+    height: 34px;
+    appearance: none;
+}
+
+.input_description {
+    border: 1px solid #565454;
+    width: 100%;
+    height: 205px;
+}
