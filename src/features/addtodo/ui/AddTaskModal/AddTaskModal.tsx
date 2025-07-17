@@ -11,7 +11,7 @@ import { PriorityField } from "features/addtodo/ui/AddTaskModal/FormFields/Prior
 
 interface AddTaskModalProps {
     isOpen: boolean;
-    closeModal: (value: boolean) => void
+    closeModal: () => void
 }
 
 export interface FormInput {
@@ -26,7 +26,7 @@ export interface FormInput {
 export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: AddTaskModalProps) => {
     const [ addTask ] = useAddTask();
     const userId:string | null | undefined = useGetCurrentUserId();
-    const {control, handleSubmit, formState: { errors }} = useForm<FormInput>({
+    const {control, handleSubmit, formState: { errors }, reset, clearErrors} = useForm<FormInput>({
         defaultValues: {
             title: '',
             date: '',
@@ -37,22 +37,36 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
     });
 
     const onSubmit = async (data: FormInput) => {
-        const fileToUpload:File | null = data?.image;
-        await addTask({
-            variables: {
-                taskInput: {
-                    userId: userId,
-                    title: data.title,
-                    date: data.date,
-                    priority: data.priority,
-                    description: data.description,
-                    image: fileToUpload,
+        try {
+            const fileToUpload:File | null = data?.image;
+            await addTask({
+                variables: {
+                    taskInput: {
+                        userId: userId,
+                        title: data.title,
+                        date: data.date,
+                        priority: data.priority,
+                        description: data.description,
+                        image: fileToUpload,
+                    }
                 }
+            })
+            reset()
+            closeModal();
+        }catch (e:unknown) {
+            if (e instanceof Error) {
+                reset()
+                closeModal();
+                alert(`Error creating task: ${e.message}`)
             }
-        })
-        closeModal(false);
+        }
+
     };
-    const handleBackButton = () => closeModal(false);
+    const handleBackButton = () => {
+        closeModal();
+        reset();
+        clearErrors(['title', 'date', 'priority', 'description', 'image']);
+    }
     return (
         <Modal isOpen={isOpen}>
             <div className="flex w-full items-center justify-between pl-6 pr-6 pt-5 pb-5">
@@ -77,7 +91,6 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
                 errors={errors}
                 />
                 <PriorityField control={control} errors={errors}/>
-
                 <div className='flex items-center w-full justify-between '>
                     <DescriptionField control={control} errors={errors}/>
                     <ImageField control={control} errors={errors}/>
