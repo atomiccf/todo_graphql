@@ -8,9 +8,8 @@ interface PriorityOptionProps {
     onChange?: () => void;
 }
 
-export const PriorityOption: React.FC<PriorityOptionProps> = ({ color, label, value, selected, onChange }) => (
-
-    <li className="flex items-center gap-1 mr-5 text-[#B7B8BF] text-sm">
+export const PriorityOption: React.FC<PriorityOptionProps> = ({ color, label, value, selected, onChange }) => {
+    return (  <li className="flex items-center gap-1 mr-5 text-[#B7B8BF] text-sm">
         <span style={{ color: `${color}`}} className={` text-2xl mr-2 `}>•</span>
         {label}
         <input
@@ -22,4 +21,6 @@ export const PriorityOption: React.FC<PriorityOptionProps> = ({ color, label, va
             onChange={onChange}
         />
     </li>
-);
+    )
+}
+

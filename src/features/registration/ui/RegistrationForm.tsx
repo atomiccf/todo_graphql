@@ -1,8 +1,8 @@
 import React from "react";
 import style from './RegistrationForm.module.css'
 import { useRegister } from "features/registration/model/useRegister";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {Link, useNavigate} from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import first_name_logo from 'assets/mdi_firstName.png'
 import last_name_logo from 'assets/mdi_lastName.png'
 import user_logo from 'assets/mdi_user.png'
