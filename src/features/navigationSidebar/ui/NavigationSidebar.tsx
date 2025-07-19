@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { useUserStore } from "shared/model/user/store";
 import defaultAvatar from 'assets/unknown_user.png'
 import { User } from "shared/model/user/types";
+import { useSetActiveLink } from "features/navigationSidebar/hook/useSetActiveLink";
+import {useEffect} from "react";
 
 
 export const NavigationSidebar = () => {
     const user:User | null = useUserStore(state => state.user);
+    const activeLink = useSetActiveLink();
+    console.log('activeLink', activeLink);
 
     return  (
         <div className="flex flex-col items-center mb-8 pt-28 bg-[#ff6767] rounded-lg h-[100vh] w-[395px] relative">
@@ -19,7 +23,10 @@ export const NavigationSidebar = () => {
             <nav className="flex-1 space-y-2 w-full h-full items-start">
                 <Link to='/app/dashboard'>
                     <div
-                        className="w-[95%] text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg px-4 py-3 flex items-center cursor-pointer">
+                        className="w-[95%] text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg px-4 py-3 flex items-center cursor-pointer"
+                        style={{ backgroundColor:activeLink === 'dashboard' ? 'white' : '', color:activeLink === 'dashboard' ? '#ff6767' : '' }}
+                    >
+
                         <svg
                             width="24"
                             height="24"
@@ -75,9 +82,11 @@ export const NavigationSidebar = () => {
                 </Link>
 
                 {/* Task Categories */}
-                <Link to='#'>
+                <Link to='/app/categories'>
                     <div
-                        className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors">
+                        className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors"
+                        style={{ backgroundColor:activeLink === 'categories' ? 'white' : '', color:activeLink === 'categories' ? '#ff6767' : '' }}
+                    >
                         <svg
                             width="24"
                             height="24"

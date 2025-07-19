@@ -8,7 +8,7 @@ export const Header = () => {
 
 
     return (
-       <header className="flex items-center justify-start px-4 pt-9 pb-6 h-[100px] bg-[#F8F8F8]">
+       <header className="w-full flex items-center justify-start gap-[50px] mb-[56px] px-4 pt-9 pb-6 h-[100px] bg-[#F8F8F8]">
          <LogoDisplay />
          <TaskSearchInput />
          <div className="flex items-center gap-[9px] mr-20">

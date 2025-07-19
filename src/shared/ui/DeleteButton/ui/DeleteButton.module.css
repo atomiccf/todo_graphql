@@ -1,0 +1,9 @@
+.image {
+    display: inline-block;
+    margin-right: 5px;
+    width: 14px;
+    height: 18px;
+    background-image: url('assets/Trash.png');
+    background-repeat: no-repeat;
+
+}

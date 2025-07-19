@@ -4,11 +4,24 @@ import { TaskStatusView } from "features/addtodo/ui/TaskCard/TaskStatusView";
 import dotedMenu from "assets/doted_menu.png";
 import { MetaDataField } from "features/addtodo/ui/TaskCard/MetaDataField";
 
+export type Priority = {
+    id: string;
+    name: string;
+    color: string;
+};
+
+export type Status = {
+    id: string;
+    name: string;
+    color: string;
+};
+
 interface Task {
     title: string;
     description: string;
     publicUrl: string;
-    priority: string;
+    status: Status;
+    priority: Priority;
     _created_at: string;
 }
 
@@ -54,7 +67,7 @@ const TaskCardComponent: React.FC<TaskCardProps> = ({ task }: TaskCardProps) => 
                         </div>
                     )}
                 </div>
-                <MetaDataField priority={task.priority} status={'not_started'} date={date} />
+                <MetaDataField priority={task.priority} status={task.status} date={date} />
             </div>
         </div>
     )
