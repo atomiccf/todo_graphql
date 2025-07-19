@@ -15,7 +15,7 @@ const TaskListWithAddModalComponent:React.FC<TaskListWithAddModalComponent> = ({
     const today = new Date();
     const day = today.getDay();
     const month = today.toLocaleString('en-US', { month: 'long' });
-
+    console.log('allTasks', allTasks);
     const todayTasks:Task[] = allTasks.filter(task => {
         const date = new Date(Number(task._created_at));
         return date.getDate() === today.getDate() &&
@@ -58,12 +58,12 @@ const TaskListWithAddModalComponent:React.FC<TaskListWithAddModalComponent> = ({
                 </button>
 
             </div>
-            <div className="flex items-center justify-start self-start overflow-y-hidden  ">
+            <div className="flex items-center justify-start self-start overflow-y-hidden">
             <span className='text-black text-xs font-medium'>{`${day} ${month}`}</span>
                 <span style={{ color: `#ABAEB5`}} className={` text-2xl ml-2 `}>•</span>
                 <span className='text-[#ABAEB5]'>Today</span>
             </div>
-            <div className="flex flex-col items-center w-full gap-2 overflow-y-auto h-full">
+            <div className="flex flex-col items-center w-full gap-2 overflow-y-auto h-full p-3">
                 {todayTasks.length > 0 ? (
                     todayTasks.map((task: Task) => (
                         <TaskCard key={task.title} task={task} />

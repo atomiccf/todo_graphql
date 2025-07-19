@@ -17,7 +17,9 @@ export const App = () => {
           <Header />
           <div className="flex w-[100vw] h-[100vh]">
               <NavigationSidebar />
-              <Outlet />
+              <div className="w-full h-full ml-[76px] mr-[76px] pb-[24px]">
+                  <Outlet />
+              </div>
           </div>
       </RequireAuth>
     </>
