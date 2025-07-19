@@ -20,9 +20,9 @@ export const PriorityField:React.FC<PriorityFieldProps> = ({control, errors,  })
                  <div className="flex items-center w-full gap-2">
                      <ul className="flex items-start gap-2">
                          {[
-                             { color: "#F21E1E", label: "Extreme", value: "extreme" },
-                             { color: "#3ABEFF", label: "Moderate", value: "moderate" },
-                             { color: "#05A301", label: "Low", value: "low" },
+                             { color: "#F21E1E", label: "Extreme", value: "Extreme" },
+                             { color: "#3ABEFF", label: "Moderate", value: "Moderate" },
+                             { color: "#05A301", label: "Low", value: "Low" },
                          ].map(option => (
                              <PriorityOption
                                  key={option.value}
