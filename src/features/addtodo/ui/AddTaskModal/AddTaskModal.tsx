@@ -75,6 +75,7 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
                 <span className="underline decoration-[#FF6767] underline-4">New</span>
                 Task</span>
                 <button
+                    aria-label={'Go Back'}
                     className="bg-white text-black flex items-center gap-1 px-3 py-2 rounded-lg border-none outline-none focus:outline-none focus:ring-0 hover:outline-none hover:ring-0 hover:border-transparentt"
                     onClick={handleBackButton}
                 >
@@ -96,13 +97,12 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
                     <ImageField control={control} errors={errors}/>
                 </div>
                 <button
-                    onSubmit={() => handleSubmit}
+                    aria-label={'Done'}
                     type="submit"
                     className=" w-[90px] h-[34px] bg-[#F24E1E] text-white rounded mt-10  flex items-center justify-center">
                     Done
                 </button>
             </form>
-
         </Modal>
     )
 }

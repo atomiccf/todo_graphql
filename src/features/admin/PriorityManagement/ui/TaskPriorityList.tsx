@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetPriority } from "features/admin/PriorityManagement/model/useGetPriority";
-import {EditButton} from "shared/ui/EditButton/ui/EditButton";
-import {DeleteButton} from "shared/ui/DeleteButton/ui/DeleteButton";
+import { EditButton } from "shared/ui/EditButton/ui/EditButton";
+import { DeleteButton } from "shared/ui/DeleteButton/ui/DeleteButton";
 
 export const TaskPriorityList:React.FC = () => {
     const { data: priorityList } = useGetPriority();

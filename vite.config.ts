@@ -9,11 +9,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  plugins: [
-      react(),
-  ],
-  root:".",
-  css: {
+    plugins: [
+        react(),
+    ],
+    root:".",
+    css: {
         postcss: {
             plugins: [
                 tailwindcss,
@@ -21,7 +21,7 @@ export default defineConfig({
             ],
         },
     },
-  resolve: {
+    resolve: {
         alias: {
             'assets': path.resolve(__dirname, './src/assets'),
             'shared': path.resolve(__dirname, './src/shared'),
