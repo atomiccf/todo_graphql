@@ -13,7 +13,8 @@ export const PriorityOption: React.FC<PriorityOptionProps> = ({ color, label, va
         <span style={{ color: `${color}`}} className={` text-2xl mr-2 `}>•</span>
         {label}
         <input
-            className=""
+            aria-label='priority'
+            id="priority"
             type='checkbox'
             name="priority"
             value={value}

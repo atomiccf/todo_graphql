@@ -3,13 +3,12 @@ import { useUserStore } from "shared/model/user/store";
 import defaultAvatar from 'assets/unknown_user.png'
 import { User } from "shared/model/user/types";
 import { useSetActiveLink } from "features/navigationSidebar/hook/useSetActiveLink";
-import {useEffect} from "react";
+
 
 
 export const NavigationSidebar = () => {
     const user:User | null = useUserStore(state => state.user);
     const activeLink = useSetActiveLink();
-    console.log('activeLink', activeLink);
 
     return  (
         <div className="flex flex-col items-center mb-8 pt-28 bg-[#ff6767] rounded-lg h-[100vh] w-[395px] relative">
@@ -19,7 +18,6 @@ export const NavigationSidebar = () => {
                 <p className="text-sm opacity-90 mb-3">{`${user?.getUser.email}`}</p>
             </div>
 
-            {/* Navigation */}
             <nav className="flex-1 space-y-2 w-full h-full items-start">
                 <Link to='/app/dashboard'>
                     <div
@@ -60,7 +58,7 @@ export const NavigationSidebar = () => {
                     </div>
                 </Link>
 
-                {/* My Task */}
+
                 <Link to='#'>
                     <div
                         className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors">
@@ -101,7 +99,7 @@ export const NavigationSidebar = () => {
                     </div>
                 </Link>
 
-                {/* Settings */}
+
                 <Link to='#'>
                     <div
                         className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors">

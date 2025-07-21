@@ -9,7 +9,6 @@ type RequireAuthProps = {
 }
 
 export const RequireAuth:React.FC<RequireAuthProps> = ({ children }) => {
-    const accessToken = localStorage.getItem('jwt');
     const navigate = useNavigate();
 
     const [refreshToken, { loading, error }] = useMutation(REFRESH_TOKEN, {
@@ -44,8 +43,8 @@ export const RequireAuth:React.FC<RequireAuthProps> = ({ children }) => {
             }
         };
 
-        checkAuth();
-    }, [navigate, accessToken]);
+         checkAuth();
+    }, [navigate]);
 
     return <>{children}</>
 }

@@ -17,6 +17,7 @@ export const InputField: React.FC<InputFieldProps> = ({ id, label, type, value, 
             <label className="text-black text-sm font-semibold mb-1" htmlFor={id}>{label}</label>
             <div className="flex items-center w-full gap-2">
                 <input
+                    aria-label={label}
                     type={type}
                     id={id}
                     value={value}

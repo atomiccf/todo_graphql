@@ -1,5 +1,5 @@
-import {useMemo} from "react";
-import {jwtDecode} from "jwt-decode";
+import { useMemo } from "react";
+import { jwtDecode } from "jwt-decode";
 
 interface DecodedUserData {
     userId: string

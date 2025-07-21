@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormatDate } from "shared/hooks/useFormatDate";
+import { useFormatDate } from "shared/hooks/useFormatDate/useFormatDate";
 import { TaskStatusView } from "features/addtodo/ui/TaskCard/TaskStatusView";
 import dotedMenu from "assets/doted_menu.png";
 import { MetaDataField } from "features/addtodo/ui/TaskCard/MetaDataField";

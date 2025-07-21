@@ -5,5 +5,6 @@ export const useGetCurrentDate = () => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const currentDay = date.getDay();
-    return {currentDay: days[currentDay], date: `${day}/0${month}/${year}`}}
+    return {currentDay: days[currentDay], date: `${day}/0${month}/${year}`}
+}
 

@@ -69,6 +69,7 @@ export const RegistrationForm = () => {
                           }
                         })}
                         className={style.input}
+                        aria-label='first_name'
                         type="text"
                         placeholder="Enter First Name"
                     />
@@ -85,6 +86,7 @@ export const RegistrationForm = () => {
                           }
                         })}
                         className={style.input}
+                        aria-label='last_name'
                         type="text"
                         placeholder="Enter Last Name"/>
                     {formState.errors.last_name && <p className={style.error}>{formState.errors.last_name.message}</p>}
@@ -100,6 +102,7 @@ export const RegistrationForm = () => {
                             },
                         })}
                         className={style.input}
+                        aria-label='username'
                         type="text"
                         placeholder="Enter Username"/>
                     {formState.errors.username && <p className={style.error}>{formState.errors.username.message}</p>}
@@ -116,6 +119,7 @@ export const RegistrationForm = () => {
                         })
                         }
                         className={style.input}
+                        aria-label='email'
                         type="text"
                         placeholder="Enter Email"/>
                     {formState.errors.email && <p className={style.error}>{formState.errors.email.message}</p>}
@@ -136,6 +140,7 @@ export const RegistrationForm = () => {
                             },
                         })}
                         className={style.input}
+                        aria-label='password'
                         type="password"
                         placeholder="Enter Password"
                     />
@@ -156,6 +161,7 @@ export const RegistrationForm = () => {
                                     'Password must include at least one letter, one number, and one special character',
                             },
                         })}
+                        aria-label='confirm_password'
                         className={style.input}
                         type="password"
                         placeholder="Confirm Password"/>
@@ -165,14 +171,18 @@ export const RegistrationForm = () => {
                         {...register('terms', {
                             required: 'Agreement is required',})
                         }
+                        aria-label='terms'
                         type="checkbox"
                         id="terms"
                         name="terms" />
                     <span style={{width:"30%", color:"black"}}>
                     I agree all terms
                 </span>
+                    {formState.errors.terms && (
+                        <p className={style.error}>{formState.errors.terms.message}</p>
+                    )}
                 </div>
-                <input type="submit" value="Register" className={style.submit}/>
+                <button aria-label="Register" type="submit" className={style.submit}>Register</button>
             </form>
             <p className='ml-16 mb-2.5 text-black'>Already have an account? <Link to="/">Sign In</Link></p>
         </div>

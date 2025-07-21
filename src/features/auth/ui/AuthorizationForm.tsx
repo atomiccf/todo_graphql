@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { useLogin } from "features/auth/model/useLogin";
 import user_logo from 'assets/mdi_user.png'
 import password_logo from 'assets/mdi_password.png'
-import {GoogleLoginButton} from "shared/ui/GoogleLoginButton";
+import {GoogleLoginButton} from "features/authByGoogle/ui/GoogleLoginButton";
 
 
 
@@ -89,7 +89,7 @@ export const AuthorizationForm = () => {
                     Remember me
                 </span>
                 </div>
-                <input type="submit" value="Sign in" className={style.submit}/>
+                <input aria-label="Sign in" type="submit" value="Sign in" className={style.submit}/>
             </form>
             <div className='flex items-center justify-center'>
                 <p className='ml-16 mr-2.5 mb-2.5 text-black'>Or, login with</p>

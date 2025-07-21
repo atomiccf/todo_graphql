@@ -9,7 +9,6 @@ interface DecodedUserData extends JwtPayload {
 }
 
 export const useFetchCurrentUser = () => {
-
     const accessToken = useMemo(() => localStorage.getItem('jwt'), []);
     const setUser = useUserStore((state) => state.setUser);
 
