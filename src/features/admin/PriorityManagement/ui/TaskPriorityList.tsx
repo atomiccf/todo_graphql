@@ -1,13 +1,57 @@
 import React from "react";
 import { useGetPriority } from "features/admin/PriorityManagement/model/useGetPriority";
-import { EditButton } from "shared/ui/EditButton/ui/EditButton";
-import { DeleteButton } from "shared/ui/DeleteButton/ui/DeleteButton";
+import { usePriorityModal } from "features/admin/PriorityManagement/model/hooks/usePriorityModal";
+import { useDeletePriority } from "features/admin/PriorityManagement/model/useDeletePriority";
+import { EditButton } from "shared/ui/EditButton/EditButton";
+import { DeleteButton } from "shared/ui/DeleteButton/DeleteButton";
+import { AddPriorityModal } from "features/admin/PriorityManagement/ui/AddPriorityModal/AddPriorityModal";
+import { AddButton } from "shared/ui/AddButton/AddButton";
+import { EditPriorityModal } from "features/admin/PriorityManagement/ui/EditPriorityModal/EditPriorityModal";
 
 export const TaskPriorityList:React.FC = () => {
-    const { data: priorityList } = useGetPriority();
+    const [modalState, dispatch] = usePriorityModal();
+    const [deletePriority] = useDeletePriority();
+    const { data: priorityList, refetch } = useGetPriority();
+    const existingPriorities = priorityList?.getAllPriorities.filter((priority) => !priority.is_deleted);
+    console.log('existingPriorities', existingPriorities)
+
+    const handleOpenAddModal = () => {
+        dispatch({ type: 'OPEN_ADD' });
+    };
+
+    const handleCloseAddModal = async () => {
+        dispatch({ type: 'CLOSE_ADD' });
+        await refetch()
+    };
+
+    const handleOpenEditButton =  (_id: string) => {
+        dispatch({ type: 'OPEN_EDIT', payload: _id  });
+    }
+
+    const handleCloseEditModal = async () => {
+        dispatch({ type: 'CLOSE_EDIT' });
+        await refetch()
+    };
+
+    const handleDeleteButton = async (_id: string) => {
+        try {
+            await deletePriority({ variables: { _id } });
+
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                alert(`Error deleting priority: ${e.message}`);
+            }
+        }
+        await refetch();
+    };
+
     return (
         <>
-            <p className="text-md font-semibold mb-4"><span className="underline decoration-[#FF6767] decoration-2">Task</span> Priority</p>
+            <div className="flex w-full items-center justify-between">
+                <p className="text-md font-semibold"><span className="underline decoration-[#FF6767] decoration-2">Task</span> Priority</p>
+                <AddButton title="Add New Priority" handleOpenModal={handleOpenAddModal}/>
+            </div>
+
             <div className="w-full overflow-hidden rounded-lg border border-black">
                 <table className="w-full border-collapse">
                     <thead className="bg-gray-100">
@@ -19,8 +63,8 @@ export const TaskPriorityList:React.FC = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {priorityList?.getAllPriorities.map((priority, index) => (
-                        <tr key={index} className="hover:bg-gray-50">
+                    {existingPriorities?.map((priority, index) => (
+                        <tr key={priority._id} className="hover:bg-gray-50">
                             <td className="p-3 border-b border-r text-center border-black">{index + 1}</td>
                             <td className="p-3 border-b border-r text-center border-black">{priority.name}</td>
                             <td className="p-3 border-b border-r text-center border-black">
@@ -34,8 +78,10 @@ export const TaskPriorityList:React.FC = () => {
                             </td>
                             <td className="p-3 border-b border-r border-black ">
                                 <div className="flex items-center justify-center gap-2">
-                                    <EditButton />
-                                    <DeleteButton />
+                                    <EditButton
+                                    onClick={()=>handleOpenEditButton(priority._id)}
+                                    />
+                                    <DeleteButton onClick={()=>handleDeleteButton(priority._id)} />
                                 </div>
                             </td>
                         </tr>
@@ -43,6 +89,15 @@ export const TaskPriorityList:React.FC = () => {
                     </tbody>
                 </table>
             </div>
+            <AddPriorityModal
+                isOpen={ modalState.isOpenAdd }
+                closeModal={ handleCloseAddModal }
+            />
+            <EditPriorityModal
+                priorityId={ modalState?.editingPriorityId }
+                isOpen={ modalState.isOpenEdit }
+                closeModal={ handleCloseEditModal }
+            />
         </>
 
     );

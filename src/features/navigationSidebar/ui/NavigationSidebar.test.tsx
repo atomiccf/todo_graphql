@@ -15,7 +15,7 @@ vi.mock('shared/model/user/store', () => ({
     }))
 }));
 
-vi.mock('features/navigationSidebar/hook/useSetActiveLink', () => ({
+vi.mock('features/navigationSidebar/hooks/useSetActiveLink', () => ({
     useSetActiveLink: vi.fn(() => 'dashboard')
 }));
 

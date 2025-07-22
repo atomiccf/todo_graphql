@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller, Control, FieldErrors } from 'react-hook-form'
-import { InputField } from "features/addtodo/ui/AddTaskModal/InputField";
+import { InputField } from "shared/ui/InputField/InputField";
 import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
 import styles from "features/addtodo/ui/AddTaskModal/AddTaskModal.module.css";
 

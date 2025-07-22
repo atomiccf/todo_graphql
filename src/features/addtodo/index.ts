@@ -1,1 +1,1 @@
-export { TaskList } from "./ui/TaskList";
+export { TaskListWithAddModal } from "./ui/TaskListWithAddModal";

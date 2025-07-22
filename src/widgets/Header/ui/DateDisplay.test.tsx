@@ -12,7 +12,7 @@ vi.mock("widgets/Header/lib/hooks/useGetCurrentDate", () => ({
 }));
 
 describe("DateDisplay", () => {
-    it("renders current day and date from the hook", () => {
+    it("renders current day and date from the hooks", () => {
         render(<DateDisplay />);
 
         expect(screen.getByText("Monday")).toBeInTheDocument();
