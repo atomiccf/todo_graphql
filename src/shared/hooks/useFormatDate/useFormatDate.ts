@@ -1,8 +1,12 @@
 import { useMemo } from "react";
 
-export const useFormatDate = (timestamp: string) => {
+export const useFormatDate = (timestamp: string | undefined) => {
     return useMemo(() => {
         const date = new Date(Number(timestamp));
+
+        if (timestamp === undefined) {
+            return 'Invalid Date';
+        }
 
         if (isNaN(date.getTime())) {
             return 'Invalid Date';

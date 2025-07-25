@@ -1,20 +1,15 @@
-import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const useSetActiveLink = (): string => {
     const [activeLink, setActiveLink] = useState<string>('')
     const location = useLocation();
     useEffect(() => {
-        const currentPath = location.pathname
+        const currentPath:string = location.pathname.split('/')[2];
+        const pages:string[] = ['dashboard', 'categories', 'vitals', 'tasks']
 
-        if (currentPath.includes('dashboard')) {
-            setActiveLink('dashboard')
-        } else if (currentPath.includes('categories')) {
-            setActiveLink('categories')
-        } else if (currentPath.includes('settings')) {
-            setActiveLink('settings')
-        } else if (currentPath.includes('users')) {
-            setActiveLink('users')
+        if (pages.includes(currentPath)) {
+            setActiveLink(pages[pages.indexOf(currentPath)])
         } else {
             setActiveLink('')
         }

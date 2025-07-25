@@ -39,10 +39,13 @@ export const NavigationSidebar = () => {
                         <span className="font-medium">Dashboard</span>
                     </div>
                 </Link>
+
                 {/* Vital Task */}
-                <Link to='#'>
+                <Link to='/app/vitals'>
                     <div
-                        className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors">
+                        className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors"
+                        style={{ backgroundColor:activeLink === 'vitals' ? 'white' : '', color:activeLink === 'vitals' ? '#ff6767' : '' }}
+                    >
                         <svg
                             width="24"
                             height="24"
@@ -59,9 +62,11 @@ export const NavigationSidebar = () => {
                 </Link>
 
 
-                <Link to='#'>
+                <Link to='tasks'>
                     <div
-                        className="w-[95%] px-4 py-3 flex items-center text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg cursor-pointer transition-colors">
+                        className="w-[95%] text-white/90 hover:bg-white hover:text-[#ff6767] rounded-lg px-4 py-3 flex items-center cursor-pointer"
+                        style={{ backgroundColor:activeLink === 'tasks' ? 'white' : '', color:activeLink === 'tasks' ? '#ff6767' : '' }}
+                    >
                         <svg
                             width="24"
                             height="24"

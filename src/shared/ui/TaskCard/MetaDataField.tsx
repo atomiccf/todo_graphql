@@ -1,5 +1,5 @@
 import React from "react";
-import { Priority, Status} from "features/addtodo/ui/TaskCard/TaskCard";
+import { Priority, Status} from "shared/ui/TaskCard/TaskCard";
 
 interface MetaDataFieldProps {
     priority: Priority;

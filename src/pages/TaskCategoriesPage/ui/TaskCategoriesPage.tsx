@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { TaskStatusList } from "features/admin/StatusManagement/ui/TaskStatusList";
 import { TaskPriorityList } from "features/admin/PriorityManagement/ui/TaskPriorityList";
-import {GoBackButton} from "shared/ui/GoBackButton/GoBackButton";
+import { GoBackButton } from "shared/ui/GoBackButton/GoBackButton";
+
 
 export const TaskCategoriesPage = () => {
     const navigate = useNavigate();
+
     const handleBackButton = () => {
         navigate('/app/dashboard');
     };

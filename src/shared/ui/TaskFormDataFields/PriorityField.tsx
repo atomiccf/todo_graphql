@@ -1,14 +1,18 @@
 import React from "react";
 import { Controller, Control, FieldErrors } from 'react-hook-form'
-import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
-import {PriorityOption} from "features/addtodo/ui/AddTaskModal/PriorityOption";
+import { PriorityOption } from "shared/ui/TaskFormDataElements/PriorityOption";
+import { TaskFormData } from "shared/types/FormTypes";
+import {useGetPriority} from "features/admin/PriorityManagement/model/useGetPriority";
 
 interface PriorityFieldProps {
-    control: Control<FormInput>;
-    errors: FieldErrors<FormInput>;
+    control: Control<TaskFormData>;
+    errors: FieldErrors<TaskFormData>;
 }
 
 export const PriorityField:React.FC<PriorityFieldProps> = ({control, errors,  }) => {
+    const { data: priorityList } = useGetPriority();
+    const existingPriorities = priorityList?.getAllPriorities.filter((priority) => !priority.is_deleted);
+    console.log('existingPriorities', existingPriorities)
  return(
      <>
          <label htmlFor="priority" className="text-black text-sm font-semibold">Priority</label>
@@ -19,18 +23,14 @@ export const PriorityField:React.FC<PriorityFieldProps> = ({control, errors,  })
              render={({ field }) => (
                  <div className="flex items-center w-full gap-2">
                      <ul className="flex items-start gap-2">
-                         {[
-                             { color: "#F21E1E", label: "Extreme", value: "Extreme" },
-                             { color: "#3ABEFF", label: "Moderate", value: "Moderate" },
-                             { color: "#05A301", label: "Low", value: "Low" },
-                         ].map(option => (
+                         {existingPriorities?.map(option => (
                              <PriorityOption
-                                 key={option.value}
+                                 key={option._id}
                                  color={option.color}
-                                 label={option.label}
-                                 value={option.value}
-                                 selected={field.value === option.value}
-                                 onChange={() => field.onChange(option.value)}
+                                 label={option.name}
+                                 value={option.name}
+                                 selected={field.value === option.name}
+                                 onChange={() => field.onChange(option.name)}
                              />
                          ))}
                      </ul>

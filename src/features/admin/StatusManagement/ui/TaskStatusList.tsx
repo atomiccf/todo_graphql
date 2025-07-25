@@ -15,7 +15,7 @@ export const TaskStatusList:React.FC = () => {
     const [deleteStatus] = useDeleteStatus();
     const existingStatuses = statusList?.getAllStatus.filter((status) => !status.is_deleted);
 
-    const handleOpenAddModal = () => {
+    const handleOpenAddModalStatus = () => {
         dispatch({ type: 'OPEN_ADD' });
     };
 
@@ -50,7 +50,7 @@ export const TaskStatusList:React.FC = () => {
         <>
             <div className="flex w-full items-center justify-between">
                 <p className="text-md font-semibold"><span className="underline decoration-[#FF6767] decoration-2">Task</span> Status</p>
-                <AddButton title="Add New Status" handleOpenModal={handleOpenAddModal}/>
+                <AddButton title="Add New Status" handleOpenModal={handleOpenAddModalStatus}/>
             </div>
 
             <div className="w-full overflow-hidden rounded-lg border border-black mb-9">
@@ -80,8 +80,8 @@ export const TaskStatusList:React.FC = () => {
                             </td>
                             <td className="p-3 border-b border-r border-black">
                                 <div className="flex items-center justify-center gap-2">
-                                    <EditButton onClick={()=> handleOpenEditButton(status._id)} />
-                                    <DeleteButton onClick={() => handleDeleteButton(status._id)} />
+                                    <EditButton size="lg" onClick={()=> handleOpenEditButton(status._id)} />
+                                    <DeleteButton size="lg" onClick={() => handleDeleteButton(status._id)} />
                                 </div>
                             </td>
                         </tr>

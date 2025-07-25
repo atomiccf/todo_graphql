@@ -1,8 +1,8 @@
 import React from 'react';
 import { useFormatDate } from "shared/hooks/useFormatDate/useFormatDate";
-import { TaskStatusView } from "features/addtodo/ui/TaskCard/TaskStatusView";
+import { TaskStatusView } from "shared/ui/TaskCard/TaskStatusView";
 import dotedMenu from "assets/doted_menu.png";
-import { MetaDataField } from "features/addtodo/ui/TaskCard/MetaDataField";
+import { MetaDataField } from "shared/ui/TaskCard/MetaDataField";
 
 export type Priority = {
     id: string;
