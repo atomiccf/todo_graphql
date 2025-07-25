@@ -21,7 +21,7 @@ const mocks = [
     },
 ];
 
-describe("useGetStatus hook", () => {
+describe("useGetStatus hooks", () => {
     it("fetches and returns priority data", async () => {
         const wrapper = ({ children }: { children: React.ReactNode }) => (
             <MockedProvider mocks={mocks} addTypename={false}>

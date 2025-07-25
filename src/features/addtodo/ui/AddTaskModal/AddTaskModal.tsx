@@ -8,6 +8,7 @@ import { DateField } from "features/addtodo/ui/AddTaskModal/FormFields/DateField
 import { DescriptionField } from "features/addtodo/ui/AddTaskModal/FormFields/DescriptionField";
 import { ImageField } from "features/addtodo/ui/AddTaskModal/FormFields/ImageField";
 import { PriorityField } from "features/addtodo/ui/AddTaskModal/FormFields/PriorityField";
+import { GoBackButton } from "shared/ui/GoBackButton/GoBackButton";
 
 interface AddTaskModalProps {
     isOpen: boolean;
@@ -62,11 +63,13 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
         }
 
     };
+
     const handleBackButton = () => {
         closeModal();
         reset();
         clearErrors(['title', 'date', 'priority', 'description', 'image']);
     }
+
     return (
         <Modal isOpen={isOpen}>
             <div className="flex w-full items-center justify-between pl-6 pr-6 pt-5 pb-5">
@@ -74,13 +77,7 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({isOpen, closeModal}: 
                 <span className="underline decoration-[#FF6767] underline-4">Add</span>
                 <span className="underline decoration-[#FF6767] underline-4">New</span>
                 Task</span>
-                <button
-                    aria-label={'Go Back'}
-                    className="bg-white text-black flex items-center gap-1 px-3 py-2 rounded-lg border-none outline-none focus:outline-none focus:ring-0 hover:outline-none hover:ring-0 hover:border-transparentt"
-                    onClick={handleBackButton}
-                >
-                    Go Back
-                </button>
+                <GoBackButton handleBackButton={handleBackButton}/>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-3 border border-[#B7B8BF] px-4 py-3.5 w-[794px] h-[476px]">
                 <TitleField

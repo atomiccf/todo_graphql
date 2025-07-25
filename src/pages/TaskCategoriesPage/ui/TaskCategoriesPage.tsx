@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { TaskStatusList } from "features/admin/StatusManagement/ui/TaskStatusList";
 import { TaskPriorityList } from "features/admin/PriorityManagement/ui/TaskPriorityList";
+import {GoBackButton} from "shared/ui/GoBackButton/GoBackButton";
 
 export const TaskCategoriesPage = () => {
     const navigate = useNavigate();
@@ -14,13 +15,7 @@ export const TaskCategoriesPage = () => {
             <h2 className="text-2xl font-semibold">
                 <span className="underline decoration-[#FF6767] decoration-2 ">Task</span> Categories
             </h2>
-            <button
-                className="underline decoration-black bg-transparent text-black flex items-center gap-1 px-3 py-2 rounded-xl border-none outline-none focus:outline-none focus:ring-0 hover:outline-none hover:ring-0 hover:border-transparentt"
-                onClick={handleBackButton}
-            >
-                Go Back
-            </button>
-
+            <GoBackButton handleBackButton={handleBackButton}/>
         </div>
           <TaskStatusList />
           <TaskPriorityList />
