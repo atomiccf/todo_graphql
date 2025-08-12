@@ -1,13 +1,13 @@
 import React from "react";
 import { Controller, Control, FieldErrors } from 'react-hook-form'
-import { InputField } from "shared/ui/InputField/InputField";
-import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
 import styles from "features/addtodo/ui/AddTaskModal/AddTaskModal.module.css";
+import { InputField } from "shared/ui/InputField/InputField";
+import { TaskFormData } from "shared/types/FormTypes";
 
 
 interface DateFieldProps {
-    control: Control<FormInput>;
-    errors: FieldErrors<FormInput>;
+    control: Control<TaskFormData>;
+    errors: FieldErrors<TaskFormData>;
 }
 
 export const DateField: React.FC<DateFieldProps> = ({ control, errors }) => (

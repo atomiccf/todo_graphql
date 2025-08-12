@@ -1,11 +1,11 @@
 import React from "react";
 import { Controller, Control, FieldErrors } from 'react-hook-form'
-import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
-import { FileUploadSection } from "features/addtodo/ui/AddTaskModal/FileUploadSection";
+import { FileUploadSection } from "shared/ui/TaskFormDataElements/FileUploadSection";
+import { TaskFormData } from "shared/types/FormTypes";
 
 interface ImageFieldProps {
-    control: Control<FormInput>;
-    errors: FieldErrors<FormInput>;
+    control: Control<TaskFormData>;
+    errors: FieldErrors<TaskFormData>;
 }
 
 export const ImageField: React.FC<ImageFieldProps> = ({control, errors}) => (

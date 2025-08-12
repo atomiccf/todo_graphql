@@ -9,7 +9,7 @@ export const DashboardPage = () => {
     const user:User | null = useUserStore(state => state.user);
     const userId:string | null | undefined = useGetCurrentUserId();
     const { data, refetch } = useGetTasks(userId);
-    const allTasks = data?.getAllTasks;
+    const allTasks = data?.getAllTasks.filter(item => !item.is_deleted);
 
     return (
         <>

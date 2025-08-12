@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Pending from "assets/Pending.png";
 import { Task } from "features/addtodo/api/getTaskList";
 import { AddTaskModal } from "./AddTaskModal/AddTaskModal";
-import { TaskCard } from "features/addtodo/ui/TaskCard/TaskCard";
+import { TaskCard } from "shared/ui/TaskCard/TaskCard";
 import { AddButton } from "shared/ui/AddButton/AddButton";
 
 interface TaskListWithAddModalComponent {

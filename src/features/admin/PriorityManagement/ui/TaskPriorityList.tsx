@@ -15,11 +15,11 @@ export const TaskPriorityList:React.FC = () => {
     const existingPriorities = priorityList?.getAllPriorities.filter((priority) => !priority.is_deleted);
     console.log('existingPriorities', existingPriorities)
 
-    const handleOpenAddModal = () => {
+    const handleOpenAddModalPriority = () => {
         dispatch({ type: 'OPEN_ADD' });
     };
 
-    const handleCloseAddModal = async () => {
+    const handleCloseAddModalPriority = async () => {
         dispatch({ type: 'CLOSE_ADD' });
         await refetch()
     };
@@ -49,7 +49,7 @@ export const TaskPriorityList:React.FC = () => {
         <>
             <div className="flex w-full items-center justify-between">
                 <p className="text-md font-semibold"><span className="underline decoration-[#FF6767] decoration-2">Task</span> Priority</p>
-                <AddButton title="Add New Priority" handleOpenModal={handleOpenAddModal}/>
+                <AddButton title="Add New Priority" handleOpenModal={handleOpenAddModalPriority}/>
             </div>
 
             <div className="w-full overflow-hidden rounded-lg border border-black">
@@ -79,9 +79,10 @@ export const TaskPriorityList:React.FC = () => {
                             <td className="p-3 border-b border-r border-black ">
                                 <div className="flex items-center justify-center gap-2">
                                     <EditButton
+                                    size="lg"
                                     onClick={()=>handleOpenEditButton(priority._id)}
                                     />
-                                    <DeleteButton onClick={()=>handleDeleteButton(priority._id)} />
+                                    <DeleteButton size="lg" onClick={()=>handleDeleteButton(priority._id)} />
                                 </div>
                             </td>
                         </tr>
@@ -91,7 +92,7 @@ export const TaskPriorityList:React.FC = () => {
             </div>
             <AddPriorityModal
                 isOpen={ modalState.isOpenAdd }
-                closeModal={ handleCloseAddModal }
+                closeModal={ handleCloseAddModalPriority }
             />
             <EditPriorityModal
                 priorityId={ modalState?.editingPriorityId }

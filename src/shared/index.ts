@@ -5,3 +5,5 @@ export { EditButton } from "./ui/EditButton/EditButton";
 export { DeleteButton } from "./ui/DeleteButton/DeleteButton";
 export { AddButton } from "./ui/AddButton/AddButton";
 export { InputField } from "./ui/InputField/InputField";
+export { NotSelectedTask } from "./ui/NotSelectedTask/NotSelectedTask";
+export type { TaskFormData } from "./types/FormTypes";

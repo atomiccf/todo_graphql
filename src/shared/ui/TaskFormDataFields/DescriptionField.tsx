@@ -1,12 +1,12 @@
 import React from "react";
 import { Controller, Control, FieldErrors } from 'react-hook-form'
-import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
 import styles from "features/addtodo/ui/AddTaskModal/AddTaskModal.module.css";
+import { TaskFormData } from "shared/types/FormTypes";
 
 
 interface DescriptionField {
-    control: Control<FormInput>;
-    errors: FieldErrors<FormInput>;
+    control: Control<TaskFormData>;
+    errors: FieldErrors<TaskFormData>;
 }
 
 export const DescriptionField: React.FC<DescriptionField> = ({ control, errors }) => {

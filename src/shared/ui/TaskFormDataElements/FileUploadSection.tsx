@@ -1,12 +1,12 @@
 import React from 'react';
 import { FieldErrors } from "react-hook-form";
-import { FormInput } from "features/addtodo/ui/AddTaskModal/AddTaskModal";
+import { TaskFormData } from "shared/types/FormTypes";
 import dragImg from 'assets/Drag&Drop.png';
 
 interface FileUploadSectionProps {
     value?: File | null;
     onChange: (file: File) => void;
-    errors?: FieldErrors<FormInput>;
+    errors?: FieldErrors<TaskFormData>;
 }
 
 export const FileUploadSection: React.FC<FileUploadSectionProps> = ({ value, onChange,errors }) => {

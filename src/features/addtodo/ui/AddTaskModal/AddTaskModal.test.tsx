@@ -22,19 +22,19 @@ vi.mock('shared/ui/Modal/Modal', () => ({
     Modal: ({ children, isOpen }: any) => isOpen ? <div data-testid="modal">{children}</div> : null,
 }));
 
-vi.mock('features/addtodo/ui/AddTaskModal/FormFields/TitleField', () => ({
+vi.mock('features/addtodo/ui/AddTaskModal/TaskFormDataFields/TitleField', () => ({
     TitleField: () => <input aria-label="title" defaultValue="Test title" />,
 }));
-vi.mock('features/addtodo/ui/AddTaskModal/FormFields/DateField', () => ({
+vi.mock('features/addtodo/ui/AddTaskModal/TaskFormDataFields/DateField', () => ({
     DateField: () => <input aria-label="date" defaultValue="2025-12-31" />,
 }));
-vi.mock('features/addtodo/ui/AddTaskModal/FormFields/DescriptionField', () => ({
+vi.mock('features/addtodo/ui/AddTaskModal/TaskFormDataFields/DescriptionField', () => ({
     DescriptionField: () => <input aria-label="description" defaultValue="Some desc" />,
 }));
-vi.mock('features/addtodo/ui/AddTaskModal/FormFields/ImageField', () => ({
+vi.mock('features/addtodo/ui/AddTaskModal/TaskFormDataFields/ImageField', () => ({
     ImageField: () => <input aria-label="image" type="file" />,
 }));
-vi.mock('features/addtodo/ui/AddTaskModal/FormFields/PriorityField', () => ({
+vi.mock('features/addtodo/ui/AddTaskModal/TaskFormDataFields/PriorityField', () => ({
     PriorityField: () => <input aria-label="priority" defaultValue="high" />,
 }));
 
