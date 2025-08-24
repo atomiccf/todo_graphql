@@ -7,3 +7,4 @@ export { AddButton } from "./ui/AddButton/AddButton";
 export { InputField } from "./ui/InputField/InputField";
 export { NotSelectedTask } from "./ui/NotSelectedTask/NotSelectedTask";
 export type { TaskFormData } from "./types/FormTypes";
+export type { Priority, Status } from "./types/tasks";

@@ -1,4 +1,4 @@
-import { useGetCurrentDate } from "widgets/Header/lib/hooks/useGetCurrentDate";
+import { useGetCurrentDate } from "widgets/Header/hooks/useGetCurrentDate";
 
 export const DateDisplay = () => {
     const {currentDay, date} = useGetCurrentDate()
