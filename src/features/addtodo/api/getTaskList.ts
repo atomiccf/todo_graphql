@@ -1,20 +1,10 @@
 import { gql, TypedDocumentNode } from "@apollo/client";
+import { Priority, Status } from "shared/types/tasks";
 
 export interface TaskVariables {
     userId: string | null | undefined;
 }
 
-type Priority = {
-    id: string;
-    name: string;
-    color: string;
-}
-
-type Status = {
-    id: string;
-    name: string;
-    color: string;
-}
 
 export interface Task {
     id: string;

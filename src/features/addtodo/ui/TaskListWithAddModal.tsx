@@ -7,7 +7,7 @@ import { AddButton } from "shared/ui/AddButton/AddButton";
 
 interface TaskListWithAddModalComponent {
     allTasks: Task[];
-    refetchTasks?: () => void
+    refetchTasks?: () => void | undefined
 }
 
 const TaskListWithAddModalComponent:React.FC<TaskListWithAddModalComponent> = ({ allTasks, refetchTasks }) => {
@@ -59,7 +59,7 @@ const TaskListWithAddModalComponent:React.FC<TaskListWithAddModalComponent> = ({
             <div className="flex flex-col items-center w-full gap-2 overflow-y-auto h-full p-3">
                 {todayTasks.length > 0 ? (
                     todayTasks.map((task: Task) => (
-                        <TaskCard key={task.title} task={task} />
+                        <TaskCard key={task.title} task={task} refetch={refetchTasks} />
                     ))
                 ) : (
                     <div className="text-center text-sm text-gray-400 italic">
@@ -78,7 +78,7 @@ const TaskListWithAddModalComponent:React.FC<TaskListWithAddModalComponent> = ({
                         {showOlderTasks && (
                             <div className="mt-2 flex flex-col gap-2 border-t border-gray-200 pt-2">
                                 {olderTasks.map((task: Task) => (
-                                    <TaskCard key={task.title} task={task} />
+                                    <TaskCard key={task.id} task={task} refetch={refetchTasks} />
                                 ))}
                             </div>
                         )}

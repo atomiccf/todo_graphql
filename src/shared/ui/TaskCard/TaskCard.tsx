@@ -1,22 +1,12 @@
 import React from 'react';
 import { useFormatDate } from "shared/hooks/useFormatDate/useFormatDate";
 import { TaskStatusView } from "shared/ui/TaskCard/TaskStatusView";
-import dotedMenu from "assets/doted_menu.png";
 import { MetaDataField } from "shared/ui/TaskCard/MetaDataField";
-
-export type Priority = {
-    id: string;
-    name: string;
-    color: string;
-};
-
-export type Status = {
-    id: string;
-    name: string;
-    color: string;
-};
+import { StatusPriorityChanger } from "features/status-and-priority-changer";
+import { Status, Priority } from 'shared/types/tasks';
 
 interface Task {
+    id: string;
     title: string;
     description: string;
     publicUrl: string;
@@ -27,9 +17,10 @@ interface Task {
 
 interface TaskCardProps {
     task: Task
+    refetch?: (() => void) | (() => void | undefined) | undefined;
 }
 
-const TaskCardComponent: React.FC<TaskCardProps> = ({ task }: TaskCardProps) => {
+const TaskCardComponent: React.FC<TaskCardProps> = ( {task , refetch} ) => {
     const date = useFormatDate(task._created_at);
 
     return (
@@ -40,9 +31,9 @@ const TaskCardComponent: React.FC<TaskCardProps> = ({ task }: TaskCardProps) => 
                         <TaskStatusView status={task.status.color} />
                         <h3 className="font-semibold text-base leading-tight text-gray-900 line-clamp-2 min-w-0">{task.title}</h3>
                     </div>
-                   <img
-                        src={dotedMenu}
-                        alt="Doted menu"
+                    <StatusPriorityChanger
+                    refetch={ refetch }
+                    taskId={ task.id }
                     />
                 </div>
                 <div className="flex gap-3">

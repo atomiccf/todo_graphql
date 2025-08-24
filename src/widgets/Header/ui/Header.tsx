@@ -5,8 +5,6 @@ import { Notifications } from "features/notifications/ui/Notifications";
 import { Calendar } from "features/calendar/ui/Calendar";
 
 export const Header = () => {
-
-
     return (
        <header className="w-full flex items-center justify-start gap-[50px] mb-[56px] px-4 pt-9 pb-6 h-[100px] bg-[#F8F8F8]">
          <LogoDisplay />
